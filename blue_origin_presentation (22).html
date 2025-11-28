@@ -2274,6 +2274,17 @@
         }
 
         /* ===== PRINT STYLES FOR PDF EXPORT ===== */
+        /*
+         * TO PRINT TO PDF:
+         * 1. Open this file in Chrome/Edge
+         * 2. Press Ctrl+P (Windows) or Cmd+P (Mac)
+         * 3. Select "Save as PDF" as destination
+         * 4. Set "Layout" to "Landscape"
+         * 5. Enable "Background graphics" (IMPORTANT!)
+         * 6. Click "Save"
+         *
+         * All slides will be exported with full styling preserved.
+         */
         @media print {
             /* --- 1. FORCE BACKGROUNDS --- */
             * {
@@ -2342,17 +2353,36 @@
 
             .presentation {
                 position: static !important;
+                transform: none !important;
             }
 
             .slide {
                 position: relative !important;
                 padding: 35px 50px !important;
                 overflow: visible !important;
+                transform: none !important;
+                transition: none !important;
+                animation: none !important;
             }
 
             .slide-content {
                 max-height: none !important;
                 height: auto !important;
+                overflow: visible !important;
+            }
+
+            /* Ensure all charts, graphs, and visual elements print */
+            canvas, svg, img {
+                max-width: 100% !important;
+                page-break-inside: avoid !important;
+            }
+
+            /* Reset any animations or transitions */
+            *, *::before, *::after {
+                animation-duration: 0s !important;
+                animation-delay: 0s !important;
+                transition-duration: 0s !important;
+                transition-delay: 0s !important;
             }
 
             /* Simplify clip-path for chevrons */
